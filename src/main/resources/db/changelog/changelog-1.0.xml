@@ -1,0 +1,34 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20220721_2048_001" author="Guille Kessler">
+            <ext:createCollection collectionName="users">
+                <ext:options>
+                    {
+                    validator: {
+                        $jsonSchema: {
+                            bsonType: "object",
+                            required: ["name", "address"],
+                            properties: {
+                                name: {
+                                    bsonType: "string",
+                                    description: "User name"
+                                },
+                                address: {
+                                    bsonType: "string",
+                                    description: "User address"
+                                }
+                            }
+                        }
+                    },
+                    validationAction: "warn",
+                    validationLevel: "strict"
+                    }
+                </ext:options>
+            </ext:createCollection>
+    </changeSet>
+</databaseChangeLog>
